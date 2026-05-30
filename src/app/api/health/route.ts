@@ -5,7 +5,8 @@ export async function GET() {
   try {
     await pool.query('SELECT 1')
     return NextResponse.json({ status: 'ok' })
-  } catch {
-    return NextResponse.json({ status: 'error' }, { status: 503 })
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : String(e)
+    return NextResponse.json({ status: 'error', detail: msg }, { status: 503 })
   }
 }

@@ -1,8 +1,10 @@
 import { Pool } from 'pg'
 
+const connStr = process.env.NEON_URL ?? process.env.DATABASE_URL ?? ''
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: (process.env.DATABASE_URL ?? '').includes('localhost') ? false : { rejectUnauthorized: false },
+  connectionString: connStr,
+  ssl: connStr.includes('localhost') ? false : { rejectUnauthorized: false },
   max: 10,
   idleTimeoutMillis: 30000,
 })
