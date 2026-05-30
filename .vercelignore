@@ -1,0 +1,4 @@
+.env
+seed.js
+docker-compose.yml
+Dockerfile
